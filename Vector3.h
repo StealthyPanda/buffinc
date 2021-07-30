@@ -21,10 +21,12 @@ public:
 
 std::ostream& operator<< (std::ostream& stream, Vector3& vector);
 //cannot chain additions together. I know.
-Vector3 operator+ (Vector3& v1, Vector3& v2);
+//edit: fixed it;
+Vector3& operator+ (Vector3& v1, Vector3& v2);
 //same thing for multiplication and all other operations actually;
-Vector3 operator* (Vector3& v1, double value);
-Vector3 operator* (double value, Vector3& v1);
+//fixed this too;
+Vector3& operator* (Vector3& v1, double value);
+Vector3& operator* (double value, Vector3& v1);
 
 
 
