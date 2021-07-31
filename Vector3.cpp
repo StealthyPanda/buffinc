@@ -1,7 +1,15 @@
 #include <iostream>
-#include "Vector3.h"
 #include <cstring>
 #include <sstream>
+#include <cmath>
+#include "Vector3.h"
+#include "Quaternion.h"
+
+double mod(double value)
+{
+	if (value < 0) value *= -1;
+	return value;
+}
 
 Vector3::Vector3()
 {
@@ -73,3 +81,77 @@ Vector3 operator* (const double value, const Vector3 v1)
 {
 	return Vector3(v1.x * value, v1.y * value, v1.z * value);
 }
+
+
+double dotproduct(const Vector3 v1, const Vector3 v2)
+{
+	return ((v1.x * v2.x) + (v1.y * v2.y) + (v1.z * v2.z));
+}
+
+Vector3 crossproduct(const Vector3 v1, const Vector3 v2)
+{
+
+	return Vector3(((v1.y * v2.z) - (v2.y * v1.z)), ((v2.x * v1.z) - (v1.x * v2.z)), ((v1.x * v2.y) - (v2.x * v1.y)));
+
+}
+
+double Vector3::getMagnitude()
+{
+	return std::pow((x * x) + (y * y) + (z * z), 0.5);
+}
+
+Vector3 Vector3::getNormalised()
+{
+	return Vector3(*this * (1/getMagnitude()));
+}
+
+void Vector3::normalise()
+{
+	double mag = getMagnitude();
+
+	x *= (1/mag);
+	y *= (1/mag);
+	z *= (1/mag);
+}
+
+void Vector3::filter()
+{
+	double threshold = std::pow(10, -8);
+	if (mod(x) <= threshold) x = 0;
+	if (mod(y) <= threshold) y = 0;
+	if (mod(z) <= threshold) z = 0;
+}
+
+Vector3 Vector3::getFiltered()
+{
+	Vector3 buff = Vector3(*this);
+	buff.filter();
+	return buff;
+}
+
+/*Vector3 Vector3::getRotated(double angleinradians, Vector3 axis)
+{
+	return Quaternion::rotate(*this, angleinradians, axis);
+}
+
+
+Vector3 Vector3::getRotated(Quaternion rotor)
+{
+	return Quaternion::rotate(*this, rotor);
+}
+
+void Vector3::rotate(double angleinradians, Vector3 axis)
+{
+	Quaternion rotted = Quaternion::rotate(*this, angleinradians, axis);
+	x = rotted.x;
+	y = rotted.y;
+	z = rotted.z;
+}
+
+void Vector3::rotate(Quaternion rotor)
+{
+	Quaternion rotted = Quaternion::rotate(*this, rotor);
+	x = rotted.x;
+	y = rotted.y;
+	z = rotted.z;
+}*/
