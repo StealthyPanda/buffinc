@@ -13,20 +13,29 @@ public:
 	Vector3();
 	Vector3(double val);
 	Vector3(double xbuff, double ybuff, double zbuff);
+	Vector3(const Vector3& v1);
 
 	std::string getStringRepresentation();
+
+	Vector3 getMultiplied(double value);
+	void multiply(double value);
 
 };
 
 
-std::ostream& operator<< (std::ostream& stream, Vector3& vector);
+std::ostream& operator<< (std::ostream& stream, Vector3 vector);
+//std::ostream& operator<< (std::ostream& stream, Vector3 vector);
 //cannot chain additions together. I know.
 //edit: fixed it;
-Vector3& operator+ (Vector3& v1, Vector3& v2);
+//nvm  its broken again.
+//nvm fixed it again. can chain any operations.
+Vector3 operator+ (const Vector3 v1, const Vector3 v2);
 //same thing for multiplication and all other operations actually;
 //fixed this too;
-Vector3& operator* (Vector3& v1, double value);
-Vector3& operator* (double value, Vector3& v1);
+//nope still broken.
+//completely fixed.
+Vector3 operator* (const Vector3 v1, const double value);
+Vector3 operator* (const double value, const Vector3 v1);
 
 
 

@@ -4,19 +4,18 @@ using namespace std;
 
 int main()
 {
+	Vector3 v = Vector3(1, 2, 3);
+	Vector3 y = Vector3(4, 5, 6);
 
-	Vector3 zero = Vector3();
-	Vector3 scalar = Vector3(2);
-	Vector3 cons = Vector3(1, 2, 3);
+	Vector3 bruh = v + y;
 
-	Vector3 bruh = -1.0 * cons;
-	Vector3 omg = 1.2 * scalar;
-	Vector3 dude = bruh + omg;
-
+	cout << v + y + v + y << endl;
 	cout << bruh << endl;
-	cout << omg << endl;
-	cout << dude << endl;
-	cout << (cons * -1) + ((scalar)) + zero << endl;
+
+	cout << (v * -1.2) + (y * -0.5) << endl;
+	
+
+	//cout << (v1 * -1.0) + (v2 * 1.2) << endl;
 
 	return 0;
 }
