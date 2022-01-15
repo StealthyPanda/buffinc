@@ -2,8 +2,8 @@
 #include <cstring>
 #include <iostream>
 #include <cmath>
-#include "Quaternion.h"
 #include "Vector3.h"
+#include "Quaternion.h"
 
 //just a c++ thing bruh
 double dmod(double value)
@@ -134,7 +134,7 @@ Quaternion Quaternion::getConjugate()
 	return Quaternion(w, -1 * imaginarypart);
 }
 
-Vector3 Quaternion::rotate(Vector3 vect, double angleinradians, Vector3 axis)
+Vector3 Quaternion::getRotated(Vector3 vect, double angleinradians, Vector3 axis)
 {
 	Quaternion rotor = Quaternion::getRotor(angleinradians, axis);
 	Quaternion rotted = (rotor * Quaternion(0, vect)) * rotor.getConjugate();
@@ -142,14 +142,14 @@ Vector3 Quaternion::rotate(Vector3 vect, double angleinradians, Vector3 axis)
 	return rotted.imaginarypart;
 }
 
-Vector3 Quaternion::rotate(Vector3 vect, Quaternion rotor)
+Vector3 Quaternion::getRotated(Vector3 vect, Quaternion rotor)
 {
 	Quaternion rotted = (rotor * Quaternion(0, vect)) * rotor.getConjugate();
 
 	return rotted.imaginarypart;
 }
 
-Vector3 rotate(Vector3 vect, double angleinradians, Vector3 axis)
+Vector3 getRotated(Vector3 vect, double angleinradians, Vector3 axis)
 {
 	Quaternion rotor = Quaternion::getRotor(angleinradians, axis);
 	Quaternion rotted = (rotor * Quaternion(0, vect)) * rotor.getConjugate();
@@ -157,9 +157,23 @@ Vector3 rotate(Vector3 vect, double angleinradians, Vector3 axis)
 	return rotted.imaginarypart;
 }
 
-Vector3 rotate(Vector3 vect, Quaternion rotor)
+Vector3 getRotated(Vector3 vect, Quaternion rotor)
 {
 	Quaternion rotted = (rotor * Quaternion(0, vect)) * rotor.getConjugate();
 
 	return rotted.imaginarypart;
+}
+
+void rotate(Vector3& vect, double angleinradians, Vector3 axis)
+{
+
+	vect = getRotated(vect, angleinradians, axis);
+
+}
+
+void rotate(Vector3& vect, Quaternion rotor)
+{
+
+	vect = getRotated(vect, rotor);
+
 }

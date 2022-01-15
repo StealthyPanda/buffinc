@@ -3,7 +3,6 @@
 #include <sstream>
 #include <cmath>
 #include "Vector3.h"
-#include "Quaternion.h"
 
 double mod(double value)
 {
@@ -142,7 +141,7 @@ Vector3 Vector3::getRotated(Quaternion rotor)
 
 void Vector3::rotate(double angleinradians, Vector3 axis)
 {
-	Quaternion rotted = Quaternion::rotate(*this, angleinradians, axis);
+	Vector3 rotted = Quaternion::rotate(*this, angleinradians, axis);
 	x = rotted.x;
 	y = rotted.y;
 	z = rotted.z;
@@ -150,7 +149,7 @@ void Vector3::rotate(double angleinradians, Vector3 axis)
 
 void Vector3::rotate(Quaternion rotor)
 {
-	Quaternion rotted = Quaternion::rotate(*this, rotor);
+	Vector3 rotted = Quaternion::rotate(*this, rotor);
 	x = rotted.x;
 	y = rotted.y;
 	z = rotted.z;

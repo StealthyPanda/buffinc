@@ -1,11 +1,15 @@
 #ifndef _Vector3_
 #define _Vector3_
 
-#include <cstring>
-#include <iostream>
-//#include "Quaternion.h"
 
-//class Quaternion;
+#ifndef IOSTREAM
+#define IOSTREAM
+#include <iostream>
+#endif
+
+
+
+
 
 class Vector3
 {
@@ -22,17 +26,14 @@ public:
 
 	Vector3 getMultiplied(double value);
 	void multiply(double value);
+
 	double getMagnitude();
+
 	Vector3 getNormalised();
 	void normalise();
 
 	Vector3 getFiltered();
 	void filter();
-
-	/*Vector3 getRotated(double angleinradians, Vector3 axis);
-	Vector3 getRotated(Quaternion rotor);
-	void rotate(double angleinradians, Vector3 axis);
-	void rotate(Quaternion rotor);*/
 
 };
 

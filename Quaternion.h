@@ -1,9 +1,15 @@
 #ifndef _Quats_
 #define _Quats_
 
+#ifndef _Vector3_
+#define _Vector3_
 #include "Vector3.h"
-#include <cstring>
+#endif
+
+#ifndef IOSTREAM
+#define IOSTREAM
 #include <iostream>
+#endif
 
 class Quaternion
 {
@@ -23,14 +29,15 @@ public:
 
 	Quaternion getNormalised();
 	void normalise();
+
 	Quaternion getFiltered();
 	void filter();
 
 	static Quaternion getRotor(double anglieinradians, Vector3 axis);
 	static Quaternion getRotor(Vector3 initial, Vector3 final);
 
-	static Vector3 rotate(Vector3 vect, double angleinradians, Vector3 axis);
-	static Vector3 rotate(Vector3 vect, Quaternion rotor);
+	static Vector3 getRotated(Vector3 vect, double angleinradians, Vector3 axis);
+	static Vector3 getRotated(Vector3 vect, Quaternion rotor);
 
 };
 
@@ -49,8 +56,11 @@ Quaternion operator* (const Quaternion q1, double scalar);
 Quaternion operator* (double scalar, const Quaternion q1);
 
 
-Vector3 rotate(Vector3 vect, double angleinradians, Vector3 axis);
-Vector3 rotate(Vector3 vect, Quaternion rotor);
+Vector3 getRotated(Vector3 vect, double angleinradians, Vector3 axis);
+Vector3 getRotated(Vector3 vect, Quaternion rotor);
+
+void rotate(Vector3& vect, double angleinradians, Vector3 axis);
+void rotate(Vector3& vect, Quaternion rotor);
 
 
 
