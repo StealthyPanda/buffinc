@@ -6,7 +6,7 @@
 #include "Quaternion.h"
 
 //just a c++ thing bruh
-double dmod(double value)
+long double dmod(long double value)
 {
 	if (value < 0) value *= -1;
 	return value;
@@ -18,13 +18,13 @@ Quaternion::Quaternion()
 	imaginarypart = Vector3(0, 0, 0);
 }
 
-Quaternion::Quaternion(double wbuff, double xbuff, double ybuff, double zbuff)
+Quaternion::Quaternion(long double wbuff, long double xbuff, long double ybuff, long double zbuff)
 {
 	w = wbuff;
 	imaginarypart = Vector3(xbuff, ybuff, zbuff);
 }
 
-Quaternion::Quaternion(double realpartparam, Vector3 imaginarypartparam)
+Quaternion::Quaternion(long double realpartparam, Vector3 imaginarypartparam)
 {
 	w = realpartparam;
 	imaginarypart = imaginarypartparam;
@@ -39,10 +39,10 @@ Quaternion operator+ (const Quaternion q1, const Quaternion q2)
 
 Quaternion operator* (const Quaternion q1, const Quaternion q2)
 {
-	double pureconst = q1.w * q2.w;
+	long double pureconst = q1.w * q2.w;
 	Vector3 w1vect = q1.w * q2.imaginarypart;
 	Vector3 w2vect = q2.w * q1.imaginarypart;
-	double dot = -1 * dotproduct(q1.imaginarypart, q2.imaginarypart);
+	long double dot = -1 * dotproduct(q1.imaginarypart, q2.imaginarypart);
 	Vector3 cross = crossproduct(q1.imaginarypart, q2.imaginarypart);
 
 	Quaternion constants = Quaternion(pureconst + dot, Vector3(0, 0, 0));
@@ -53,12 +53,12 @@ Quaternion operator* (const Quaternion q1, const Quaternion q2)
 	return product;
 }
 
-Quaternion operator* (const Quaternion q1, double value)
+Quaternion operator* (const Quaternion q1, long double value)
 {
 	return Quaternion(q1.w * value, q1.imaginarypart * value);
 }
 
-Quaternion operator* (double value, const Quaternion q1)
+Quaternion operator* (long double value, const Quaternion q1)
 {
 	return q1 * value;
 }
@@ -78,7 +78,7 @@ std::ostream& operator<< (std::ostream& stream, Quaternion quat)
 	return stream;
 }
 
-double Quaternion::getMagnitude()
+long double Quaternion::getMagnitude()
 {
 	return std::pow((w * w) + (imaginarypart.x * imaginarypart.x) + (imaginarypart.y * imaginarypart.y) + (imaginarypart.z * imaginarypart.z), 0.5);
 }
@@ -90,14 +90,14 @@ Quaternion Quaternion::getNormalised()
 
 void Quaternion::normalise()
 {
-	double mag = getMagnitude();
+	long double mag = getMagnitude();
 	w *= (1/mag);
 	imaginarypart = imaginarypart * (1/mag);
 }
 
 void Quaternion::filter()
 {
-	double threshold = std::pow(10, -8);
+	long double threshold = std::pow(10, -8);
 	if (dmod(w) <= threshold) w = 0;
 	if (dmod(imaginarypart.x) <= threshold) imaginarypart.x = 0;
 	if (dmod(imaginarypart.y) <= threshold) imaginarypart.y = 0;
@@ -112,7 +112,7 @@ Quaternion Quaternion::getFiltered()
 }
 
 
-Quaternion Quaternion::getRotor(double angleinradians, Vector3 axis)
+Quaternion Quaternion::getRotor(long double angleinradians, Vector3 axis)
 {
 	axis.normalise();
 	angleinradians /= 2;
@@ -121,7 +121,7 @@ Quaternion Quaternion::getRotor(double angleinradians, Vector3 axis)
 
 Quaternion Quaternion::getRotor(Vector3 initial, Vector3 final)
 {
-	double angle = std::acos(dotproduct(initial, final)/(initial.getMagnitude() * final.getMagnitude()));
+	long double angle = std::acos(dotproduct(initial, final)/(initial.getMagnitude() * final.getMagnitude()));
 	//angle /= 2;
 	Vector3 axis = crossproduct(initial, final).getNormalised();
 	//std::cout << "AXIS: " << axis << std::endl;
@@ -134,7 +134,7 @@ Quaternion Quaternion::getConjugate()
 	return Quaternion(w, -1 * imaginarypart);
 }
 
-Vector3 Quaternion::getRotated(Vector3 vect, double angleinradians, Vector3 axis)
+Vector3 Quaternion::getRotated(Vector3 vect, long double angleinradians, Vector3 axis)
 {
 	Quaternion rotor = Quaternion::getRotor(angleinradians, axis);
 	Quaternion rotted = (rotor * Quaternion(0, vect)) * rotor.getConjugate();
@@ -149,7 +149,7 @@ Vector3 Quaternion::getRotated(Vector3 vect, Quaternion rotor)
 	return rotted.imaginarypart;
 }
 
-Vector3 getRotated(Vector3 vect, double angleinradians, Vector3 axis)
+Vector3 getRotated(Vector3 vect, long double angleinradians, Vector3 axis)
 {
 	Quaternion rotor = Quaternion::getRotor(angleinradians, axis);
 	Quaternion rotted = (rotor * Quaternion(0, vect)) * rotor.getConjugate();
@@ -164,7 +164,7 @@ Vector3 getRotated(Vector3 vect, Quaternion rotor)
 	return rotted.imaginarypart;
 }
 
-void rotate(Vector3& vect, double angleinradians, Vector3 axis)
+void rotate(Vector3& vect, long double angleinradians, Vector3 axis)
 {
 
 	vect = getRotated(vect, angleinradians, axis);
@@ -176,4 +176,9 @@ void rotate(Vector3& vect, Quaternion rotor)
 
 	vect = getRotated(vect, rotor);
 
+}
+
+bool operator== (const Quaternion q1, const Quaternion q2)
+{
+	return ((q1.w == q2.w) and (q1.imaginarypart == q2.imaginarypart));
 }

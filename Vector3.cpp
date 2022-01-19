@@ -4,7 +4,7 @@
 #include <cmath>
 #include "Vector3.h"
 
-double mod(double value)
+long double mod(long double value)
 {
 	if (value < 0) value *= -1;
 	return value;
@@ -17,14 +17,14 @@ Vector3::Vector3()
 	z = 0;
 }
 
-Vector3::Vector3(double val)
+Vector3::Vector3(long double val)
 {
 	x = val;
 	y = val;
 	z = val;
 }
 
-Vector3::Vector3(double xbuff, double ybuff, double zbuff)
+Vector3::Vector3(long double xbuff, long double ybuff, long double zbuff)
 {
 	x = xbuff;
 	y = ybuff;
@@ -47,12 +47,12 @@ std::string Vector3::getStringRepresentation()
 
 }
 
-Vector3 Vector3::getMultiplied(double value)
+Vector3 Vector3::getMultiplied(long double value)
 {
 	return (*this * value);
 }
 
-void Vector3::multiply(double value)
+void Vector3::multiply(long double value)
 {
 	x *= value;
 	y *= value;
@@ -71,18 +71,23 @@ Vector3 operator+ (const Vector3 v1, const Vector3 v2)
 	return Vector3(v1.x + v2.x, v1.y + v2.y, v1.z + v2.z);
 }
 
-Vector3 operator* (const Vector3 v1, const double value)
+Vector3 operator* (const Vector3 v1, const long double value)
 {
 	return Vector3(v1.x * value, v1.y * value, v1.z * value);
 }
 
-Vector3 operator* (const double value, const Vector3 v1)
+Vector3 operator* (const long double value, const Vector3 v1)
 {
 	return Vector3(v1.x * value, v1.y * value, v1.z * value);
 }
 
+Vector3 operator- (const Vector3 v1, const Vector3 v2)
+{
+	return (v1 + (v2 * -1));
+}
 
-double dotproduct(const Vector3 v1, const Vector3 v2)
+
+long double dotproduct(const Vector3 v1, const Vector3 v2)
 {
 	return ((v1.x * v2.x) + (v1.y * v2.y) + (v1.z * v2.z));
 }
@@ -94,7 +99,7 @@ Vector3 crossproduct(const Vector3 v1, const Vector3 v2)
 
 }
 
-double Vector3::getMagnitude()
+long double Vector3::getMagnitude()
 {
 	return std::pow((x * x) + (y * y) + (z * z), 0.5);
 }
@@ -106,7 +111,7 @@ Vector3 Vector3::getNormalised()
 
 void Vector3::normalise()
 {
-	double mag = getMagnitude();
+	long double mag = getMagnitude();
 
 	x *= (1/mag);
 	y *= (1/mag);
@@ -115,7 +120,7 @@ void Vector3::normalise()
 
 void Vector3::filter()
 {
-	double threshold = std::pow(10, -8);
+	long double threshold = std::pow(10, -8);
 	if (mod(x) <= threshold) x = 0;
 	if (mod(y) <= threshold) y = 0;
 	if (mod(z) <= threshold) z = 0;
@@ -126,6 +131,11 @@ Vector3 Vector3::getFiltered()
 	Vector3 buff = Vector3(*this);
 	buff.filter();
 	return buff;
+}
+
+bool operator== (const Vector3 v1, const Vector3 v2)
+{
+	return ((v1.x == v2.x) and (v1.y == v2.y) and (v1.z == v2.z));
 }
 
 /*Vector3 Vector3::getRotated(double angleinradians, Vector3 axis)

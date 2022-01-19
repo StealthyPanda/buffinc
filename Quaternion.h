@@ -15,15 +15,15 @@ class Quaternion
 {
 
 public:
-	double w;
+	long double w;
 	Vector3 imaginarypart;
 
 	Quaternion();
-	Quaternion(double w, double x, double y, double z);
-	Quaternion(double realpartparam, Vector3 imaginarypartparam);
+	Quaternion(long double w, long double x, long double y, long double z);
+	Quaternion(long double realpartparam, Vector3 imaginarypartparam);
 
 	std::string getStringRepresentation();
-	double getMagnitude();
+	long double getMagnitude();
 
 	Quaternion getConjugate();
 
@@ -33,10 +33,10 @@ public:
 	Quaternion getFiltered();
 	void filter();
 
-	static Quaternion getRotor(double anglieinradians, Vector3 axis);
+	static Quaternion getRotor(long double anglieinradians, Vector3 axis);
 	static Quaternion getRotor(Vector3 initial, Vector3 final);
 
-	static Vector3 getRotated(Vector3 vect, double angleinradians, Vector3 axis);
+	static Vector3 getRotated(Vector3 vect, long double angleinradians, Vector3 axis);
 	static Vector3 getRotated(Vector3 vect, Quaternion rotor);
 
 };
@@ -52,15 +52,17 @@ Quaternion operator+ (const Quaternion q1, const Quaternion q2);
 Quaternion operator* (const Quaternion q1, const Quaternion q2);
 
 //multiplies quaternion by scalar
-Quaternion operator* (const Quaternion q1, double scalar);
-Quaternion operator* (double scalar, const Quaternion q1);
+Quaternion operator* (const Quaternion q1, long double scalar);
+Quaternion operator* (long double scalar, const Quaternion q1);
 
 
-Vector3 getRotated(Vector3 vect, double angleinradians, Vector3 axis);
+Vector3 getRotated(Vector3 vect, long double angleinradians, Vector3 axis);
 Vector3 getRotated(Vector3 vect, Quaternion rotor);
 
-void rotate(Vector3& vect, double angleinradians, Vector3 axis);
+void rotate(Vector3& vect, long double angleinradians, Vector3 axis);
 void rotate(Vector3& vect, Quaternion rotor);
+
+bool operator== (const Quaternion q1, const Quaternion q2);
 
 
 

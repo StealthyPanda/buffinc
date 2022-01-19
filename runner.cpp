@@ -2,7 +2,9 @@
 #define IOSTREAM
 #include <iostream>
 #endif
-#include "consolidatetest.h"
+//#include "consolidatetest.h"
+
+#include "renderer.h"
 //these 2 statements give you access to math constants like M_PI (pi), M_PI_2 (pi/2), M_PI/4 (pi/4) etc
 #define _USE_MATH_DEFINES
 #include <cmath>
@@ -51,7 +53,7 @@
 
 
 
-int main()
+/*int main()
 {
 
 	
@@ -66,7 +68,7 @@ int main()
 	std::cout << "Original: " << pointer << std::endl;
 
 	return 0;
-}
+}*/
 
 /*
 int main(int argc, char const *argv[])
@@ -84,3 +86,41 @@ int main(int argc, char const *argv[])
 	return 0;
 }*/
 
+
+using namespace buffinc;
+
+#include <iomanip>
+#include <chrono>
+using namespace std::chrono;
+int main()
+{
+	//this is for measuring time taken for execution;
+	auto start = high_resolution_clock::now();
+
+	//this is needed for high precision stuff
+	std::cout << std::setprecision(18);
+	
+	int k = 10000 * 1000;
+	for (int i = 0; i < k; i++)
+	{
+		Vector3 planevertices[4] = {Vector3(0, 0, sin(i)), Vector3(0, 1, sin(i)), Vector3(1, 1, sin(i)), Vector3(1, 0, sin(i))};
+
+		Plane bruh = Plane(planevertices, 4);
+	}
+
+	//std::cout << bruh.normal << std::endl;
+
+
+
+
+	//this was the problem:
+	//also IMP: need <iomanip> header to setprecision();
+	//std::cout << std::setprecision(18) <<  power << std::endl << dpower << std::endl;
+
+
+	auto stop = high_resolution_clock::now();
+
+	auto duration = duration_cast<microseconds>(stop - start);
+	std::cout << "Time taken: " << duration.count() << "microsecs or " << (duration.count()/1000000.) << "s" << std::endl;
+	return 0;
+}
