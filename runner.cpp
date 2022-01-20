@@ -91,27 +91,43 @@ using namespace buffinc;
 
 #include <iomanip>
 #include <chrono>
+#include <thread>
 using namespace std::chrono;
-int main()
+/*int main()
 {
 	//this is for measuring time taken for execution;
 	auto start = high_resolution_clock::now();
 
 	//this is needed for high precision stuff
 	std::cout << std::setprecision(18);
-	
-	int k = 10000 * 1000;
-	for (int i = 0; i < k; i++)
-	{
-		Vector3 planevertices[4] = {Vector3(0, 0, sin(i)), Vector3(0, 1, sin(i)), Vector3(1, 1, sin(i)), Vector3(1, 0, sin(i))};
 
-		Plane bruh = Plane(planevertices, 4);
+	long long k = 1000 * 1000 * 1000;
+	int p = 1000;
+
+	std::thread* threads[p];
+
+	for (int i = 0; i < p; ++i)
+	{
+		std::thread* athread = new std::thread([](int bufferi){
+
+
+			for(int i = 0; i < (1000 * 1000); i++)
+			{
+				Vector3 planevertices[] = {Vector3(0, 0, sin(bufferi)), Vector3(0, 0, sin(bufferi)), Vector3(0, 1, sin(bufferi)), Vector3(0, 1, sin(bufferi))};
+				Plane plane = Plane(planevertices, 4);
+			}
+
+		}, (i));
+		threads[i] = athread;
 	}
 
-	//std::cout << bruh.normal << std::endl;
+	//std::cout << plane.normal << std::endl;
 
 
-
+	for (int i = 0; i < p; ++i)
+	{
+		threads[i]->join();
+	}
 
 	//this was the problem:
 	//also IMP: need <iomanip> header to setprecision();
@@ -123,4 +139,27 @@ int main()
 	auto duration = duration_cast<microseconds>(stop - start);
 	std::cout << "Time taken: " << duration.count() << "microsecs or " << (duration.count()/1000000.) << "s" << std::endl;
 	return 0;
+}*/
+
+
+int main()
+{
+	auto start = high_resolution_clock::now();
+	std::cout << std::setprecision(18);
+
+
+
+
+	Ray bruh = *(Ray::getRay(Vector3(), Vector3(0, 0, 1)));
+	std::cout << bruh << std::endl;
+
+	Vector3 planevertices[] = {Vector3(0, 0, 3), Vector3(0, 0, 3), Vector3(0, 1, 3), Vector3(0, 1, 3)};
+	Plane plane = Plane(planevertices, 4);
+
+	std::cout << "Intersection: " << (plane << bruh) << std::endl;
+
+	auto stop = high_resolution_clock::now();
+	auto duration = duration_cast<microseconds>(stop - start);
+	std::cout << "Time taken: " << duration.count() << "microsecs or " << (duration.count()/1000000.) << "s" << std::endl;
+	return 0;	
 }

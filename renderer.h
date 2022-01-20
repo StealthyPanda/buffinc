@@ -23,6 +23,17 @@ namespace buffinc
 		Plane(Vector3 vertices[], int nvertices);
 	};
 
+	class Ray
+	{
+	public:
+		Vector3 start, direction;
+
+		Ray();
+		Ray(Vector3 start, Vector3 direction);
+
+		static Ray* getRay(Vector3 startpoint, Vector3 endpoint);
+	};
+
 	class Shell
 	{
 	public:
@@ -41,3 +52,8 @@ namespace buffinc
 		World();
 	};
 }
+
+std::ostream& operator << (std::ostream& outstream, buffinc::Ray ray);
+
+Vector3 operator << (buffinc::Plane& plane, buffinc::Ray& ray);
+Vector3 operator >> (buffinc::Ray& ray, buffinc::Plane& plane);
