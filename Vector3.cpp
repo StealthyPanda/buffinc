@@ -15,6 +15,7 @@ Vector3::Vector3()
 	x = 0;
 	y = 0;
 	z = 0;
+	this->isnull = false;
 }
 
 Vector3::Vector3(long double val)
@@ -22,13 +23,21 @@ Vector3::Vector3(long double val)
 	x = val;
 	y = val;
 	z = val;
+	this->isnull = false;
 }
+
+Vector3::Vector3(bool isnull)
+{
+	this->isnull = isnull;
+}
+
 
 Vector3::Vector3(long double xbuff, long double ybuff, long double zbuff)
 {
 	x = xbuff;
 	y = ybuff;
 	z = zbuff;
+	this->isnull = false;
 }
 
 Vector3::Vector3(const Vector3& v1)
@@ -36,6 +45,7 @@ Vector3::Vector3(const Vector3& v1)
 	x = v1.x;
 	y = v1.y;
 	z = v1.z;
+	this->isnull = v1.isnull;
 }
 
 std::string Vector3::getStringRepresentation()
@@ -87,12 +97,12 @@ Vector3 operator- (const Vector3 v1, const Vector3 v2)
 }
 
 
-long double dotproduct(const Vector3 v1, const Vector3 v2)
+long double dotproduct(const Vector3& v1, const Vector3& v2)
 {
 	return ((v1.x * v2.x) + (v1.y * v2.y) + (v1.z * v2.z));
 }
 
-Vector3 crossproduct(const Vector3 v1, const Vector3 v2)
+Vector3 crossproduct(const Vector3& v1, const Vector3& v2)
 {
 
 	return Vector3(((v1.y * v2.z) - (v2.y * v1.z)), ((v2.x * v1.z) - (v1.x * v2.z)), ((v1.x * v2.y) - (v2.x * v1.y)));

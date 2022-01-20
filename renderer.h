@@ -1,7 +1,8 @@
 #include "Vector3.h"
 #include "Quaternion.h"
 
-#define PLANETHRESH 0.00001
+#define PLANETHRESH 0.000001
+
 
 namespace buffinc
 {
@@ -12,15 +13,16 @@ namespace buffinc
 		Vector3* vertices;
 		Vector3 point, normal;
 		int nvertices;
-		bool bounded;
+		bool bounded, exists;
 
 		Vector3 getNormal();
+		long double getArea();
 
 		Plane();
 		Plane(Vector3 point, Vector3 normal);
 
 		//vertices MUST be provided in cyclic order; otherwise expect weird behaviour
-		Plane(Vector3 vertices[], int nvertices);
+		Plane(Vector3 (&vertices)[4], int nvertices);
 	};
 
 	class Ray
@@ -55,5 +57,5 @@ namespace buffinc
 
 std::ostream& operator << (std::ostream& outstream, buffinc::Ray ray);
 
-Vector3 operator << (buffinc::Plane& plane, buffinc::Ray& ray);
-Vector3 operator >> (buffinc::Ray& ray, buffinc::Plane& plane);
+Vector3& operator << (buffinc::Plane& plane, buffinc::Ray& ray);
+Vector3& operator >> (buffinc::Ray& ray, buffinc::Plane& plane);

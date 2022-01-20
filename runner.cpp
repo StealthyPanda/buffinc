@@ -141,6 +141,9 @@ using namespace std::chrono;
 	return 0;
 }*/
 
+//compilation statement: 
+//g++ runner.cpp Vector3.cpp Quaternion.cpp renderer.cpp -o builds\output -std=c++11 -pthread
+
 
 int main()
 {
@@ -150,16 +153,48 @@ int main()
 
 
 
-	Ray bruh = *(Ray::getRay(Vector3(), Vector3(0, 0, 1)));
+	Ray bruh = *(Ray::getRay(Vector3(), Vector3(0, 0, 6)));
 	std::cout << bruh << std::endl;
 
-	Vector3 planevertices[] = {Vector3(0, 0, 3), Vector3(0, 0, 3), Vector3(0, 1, 3), Vector3(0, 1, 3)};
+	Vector3 planevertices[] = {Vector3(-1, -1, 3), Vector3(-1, 1, 3), Vector3(1, 1, 3), Vector3(1, -1, 3)};
 	Plane plane = Plane(planevertices, 4);
 
-	std::cout << "Intersection: " << (plane << bruh) << std::endl;
+	long double x = 0.1;
+
+	Vector3 anotherplaneverts[] = {Vector3(0.1f, 0, 3), Vector3(0.1f, 1, 3), Vector3(1+0.1f, 1, 3), Vector3(1+0.1f, 0, 3)};
+	Plane anotherplane = Plane(anotherplaneverts, 4);
+
+	
+	Vector3 intersection = (anotherplane << bruh);
+	
+
+
+	if (intersection.isnull)
+	{
+		std::cout << "Ray does not intersect plane" << std::endl;
+	}
+	else
+	{
+		std::cout << "Intersection: " << intersection << std::endl;
+	}
+
+
+
+
 
 	auto stop = high_resolution_clock::now();
 	auto duration = duration_cast<microseconds>(stop - start);
-	std::cout << "Time taken: " << duration.count() << "microsecs or " << (duration.count()/1000000.) << "s" << std::endl;
+	std::cout << "Time taken: " << duration.count() << "micros or " << (duration.count()/1000000.) << "s" << std::endl;
 	return 0;	
 }
+
+/*int main()
+{
+
+	Vector3 anullvector = Vector3(true);
+	Vector3 normalvector = Vector3();
+
+	std::cout << true << " " << false << " " << anullvector.isnull << " " << normalvector.isnull << " " << std::endl;
+
+	return 0;
+}*/

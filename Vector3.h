@@ -16,11 +16,15 @@ class Vector3
 
 public:
 	long double x, y, z;
+	bool isnull;
+
 
 	Vector3();
 	Vector3(long double val);
 	Vector3(long double xbuff, long double ybuff, long double zbuff);
 	Vector3(const Vector3& v1);
+
+	Vector3(bool isnull);
 
 	std::string getStringRepresentation();
 
@@ -34,6 +38,8 @@ public:
 
 	Vector3 getFiltered();
 	void filter();
+
+
 
 };
 
@@ -63,10 +69,10 @@ Vector3 operator* (const Vector3 v1, const long double value);
 Vector3 operator* (const long double value, const Vector3 v1);
 
 //gives dotproduct of 2 vectors.
-long double dotproduct(const Vector3 v1, const Vector3 v2);
+long double dotproduct(const Vector3& v1, const Vector3& v2);
 
 //fives crossproduct of 2 vectors.
-Vector3 crossproduct(const Vector3 v1, const Vector3 v2);
+Vector3 crossproduct(const Vector3& v1, const Vector3& v2);
 
 //returns true iff x, y, z, components of both are equal
 bool operator== (const Vector3 v1, const Vector3 v2);
