@@ -92,6 +92,7 @@ using namespace buffinc;
 #include <iomanip>
 #include <chrono>
 #include <thread>
+//#include "mingw.thread.h"
 using namespace std::chrono;
 /*int main()
 {
@@ -145,7 +146,7 @@ using namespace std::chrono;
 //g++ runner.cpp Vector3.cpp Quaternion.cpp renderer.cpp -o builds\output -std=c++11 -pthread
 
 
-int main()
+/*int main()
 {
 	auto start = high_resolution_clock::now();
 	std::cout << std::setprecision(18);
@@ -186,7 +187,8 @@ int main()
 	auto duration = duration_cast<microseconds>(stop - start);
 	std::cout << "Time taken: " << duration.count() << "micros or " << (duration.count()/1000000.) << "s" << std::endl;
 	return 0;	
-}
+}*/
+
 
 /*int main()
 {
@@ -198,3 +200,49 @@ int main()
 
 	return 0;
 }*/
+
+int main()
+{
+	auto start = high_resolution_clock::now();
+	std::cout << std::setprecision(18);
+
+	//int k = 1000 * 1000 * 1000;
+	int p = 1000;
+
+	std::thread* allthreads[p];
+
+	for (int i = 0; i < p; ++i)
+	{
+		std::thread* athread = new std::thread([](int density){
+
+			Vector3 planeverts[4] = {Vector3(5, -5, -5), Vector3(5, -5, 5), Vector3(5, 5, 5), Vector3(5, 5, -5)};
+			Plane receiver = Plane(planeverts, 4);
+
+			for (int j = (-1*density); j < density; ++j)
+			{
+				for (int k = (-1*density); k < density; ++k)
+				{
+					Ray aray = *(Ray::getRay(Vector3(), Vector3(1, j, k)));
+					(aray >> receiver);
+				}
+			}
+
+		}, (500));
+		allthreads[i] = athread;
+	}
+
+	for (int i = 0; i < p; ++i)
+	{
+		allthreads[i]->join();
+	}
+
+
+
+
+
+
+	auto stop = high_resolution_clock::now();
+	auto duration = duration_cast<microseconds>(stop - start);
+	std::cout << "Time taken: " << duration.count() << "micros or " << (duration.count()/1000000.) << "s" << std::endl;
+	return 0;
+}
