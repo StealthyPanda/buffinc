@@ -201,13 +201,11 @@ using namespace std::chrono;
 	return 0;
 }*/
 
-int main()
+void testfunc(int k, int p)
 {
-	auto start = high_resolution_clock::now();
-	std::cout << std::setprecision(18);
 
-	//int k = 1000 * 1000 * 1000;
-	int p = 1000;
+	k = std::pow(10, k);
+	p = std::pow(10, p);
 
 	std::thread* allthreads[p];
 
@@ -223,11 +221,11 @@ int main()
 				for (int k = (-1*density); k < density; ++k)
 				{
 					Ray aray = *(Ray::getRay(Vector3(), Vector3(1, j, k)));
-					(aray >> receiver);
+					Vector3 bruh = (aray >> receiver);
 				}
 			}
 
-		}, (500));
+		}, ((k/(2*p))));
 		allthreads[i] = athread;
 	}
 
@@ -236,13 +234,62 @@ int main()
 		allthreads[i]->join();
 	}
 
+}
+
+#include <fstream>
+
+int main()
+{
+	
+	std::cout << std::setprecision(18);
+
+	//int k = 1000 * 1000 * 1000;
+
+	std::fstream outputfile;
+
+	outputfile.open("threadstest.csv", std::ios::out);
+
+	if (outputfile)
+
+	{
+		for (int i = 1; i <= 4; ++i)
+		{
+			for (int j = 0; j <= i; ++j)
+			{
+				auto start = high_resolution_clock::now();
+
+				testfunc(i, j);
+
+				auto stop = high_resolution_clock::now();
+				auto duration = duration_cast<microseconds>(stop - start);
+
+				outputfile << i << "," << j << "," << duration.count() << "\n";
+			}
+		}
+		outputfile.close();
+	}
+	else
+	{
+		std::cout << "File coudlnt be made" << std::endl;
+		return 0;
+	}
+	
+
+
+	std::cout << "Program end" << std::endl;
 
 
 
-
-
-	auto stop = high_resolution_clock::now();
-	auto duration = duration_cast<microseconds>(stop - start);
-	std::cout << "Time taken: " << duration.count() << "micros or " << (duration.count()/1000000.) << "s" << std::endl;
+	
+	//std::cout << "Time taken: " << duration.count() << "micros or " << (duration.count()/1000000.) << "s" << std::endl;
 	return 0;
 }
+
+/*int main()
+{
+
+	system("echo bruh");
+	system("mkdir echo bruh");
+
+	return 0;
+}*/
