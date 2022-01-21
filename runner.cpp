@@ -216,16 +216,16 @@ void testfunc(int k, int p)
 			Vector3 planeverts[4] = {Vector3(5, -5, -5), Vector3(5, -5, 5), Vector3(5, 5, 5), Vector3(5, 5, -5)};
 			Plane receiver = Plane(planeverts, 4);
 
-			for (int j = (-1*density); j < density; ++j)
+			for (int j = 0; j < density; ++j)
 			{
-				for (int k = (-1*density); k < density; ++k)
+				for (int k = 0; k < density; ++k)
 				{
 					Ray aray = *(Ray::getRay(Vector3(), Vector3(1, j, k)));
 					Vector3 bruh = (aray >> receiver);
 				}
 			}
 
-		}, ((k/(2*p))));
+		}, ((k/(p))));
 		allthreads[i] = athread;
 	}
 
@@ -247,14 +247,14 @@ int main()
 
 	std::fstream outputfile;
 
-	outputfile.open("threadstest.csv", std::ios::out);
+	outputfile.open("threadstest.csv", std::ios::out | std::ios::app);
 
 	if (outputfile)
 
 	{
 		for (int i = 1; i <= 4; ++i)
 		{
-			for (int j = 0; j <= i; ++j)
+			for (int j = 1; j <= i; ++j)
 			{
 				auto start = high_resolution_clock::now();
 
