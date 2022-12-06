@@ -57,7 +57,7 @@ buffinc::Plane::Plane(Vector3 point, Vector3 normal)
 
 
 
-buffinc::Plane::Plane(Vector3 (&vertices)[4], int nvertices)
+buffinc::Plane::Plane(Vector3* vertices, int nvertices)
 {
 	if (!((nvertices==3) or (nvertices == 4))) return;
 	Vector3 abccross = crossproduct((vertices[2] - vertices[0]), (vertices[1] - vertices[0])).getNormalised();
@@ -83,6 +83,35 @@ buffinc::Plane::Plane(Vector3 (&vertices)[4], int nvertices)
 	this->point = point;
 	this->exists = true;
 }
+
+void buffinc::Plane::rotateglobal(long double radians, Vector3 axis)
+{
+	for (int i = 0; i < this->nvertices; i++)
+	{
+		this->vertices[i] = getRotated(this->vertices, radians, axis);
+	}
+	this->normal = this->getNormal();
+}
+
+void buffinc::Plane::rotateglobal(Quaternion rotor)
+{
+	for (int i = 0; i < this->nvertices; i++)
+	{
+		this->vertices[i] = getRotated(this->vertices, rotor);
+	}
+	this->normal = this->getNormal();
+}
+
+void buffinc::Plane::display()
+{
+	std::cout << "Points : " << std::endl;
+	for (int i = 0; i < this->nvertices; i++) std::cout << this->vertices[i] << std::endl;
+	std::cout << "Center  : " << this->point << std::endl;
+	std::cout << "Normal  : " << this->normal << std::endl;
+	std::cout << "Exists  : " << this->exists << std::endl;
+	std::cout << "Bounded : " << this->bounded << std::endl;
+}
+
 
 buffinc::Ray::Ray()
 {

@@ -22,7 +22,12 @@ namespace buffinc
 		Plane(Vector3 point, Vector3 normal);
 
 		//vertices MUST be provided in cyclic order; otherwise expect weird behaviour
-		Plane(Vector3 (&vertices)[4], int nvertices);
+		Plane(Vector3* vertices, int nvertices);
+
+		void rotateglobal(long double radians, Vector3 axis);
+		void rotateglobal(Quaternion rotor);
+
+		void display();
 	};
 
 	class Ray
