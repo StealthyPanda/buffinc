@@ -30,7 +30,7 @@ buffinc::Shell::Shell(Vector3 vertices[], int nvertices)
 
 Vector3 buffinc::Plane::getNormal()
 {
-	return crossproduct((vertices[2] - vertices[0]), (vertices[1] - vertices[0])).getNormalised();
+	return crossproduct((vertices[1] - vertices[0]), (vertices[2] - vertices[0])).getNormalised();
 }
 
 long double buffinc::Plane::getArea()
@@ -66,11 +66,21 @@ buffinc::Plane::Plane(Vector3 (&vertices)[4], int nvertices)
 		Vector3 acdcross = crossproduct((vertices[3] - vertices[0]), (vertices[2] - vertices[0])).getNormalised();
 		if (!(abccross == acdcross)) return;
 	}
+
+	Vector3 point = vertices[0] + vertices[1] + vertices[2];
+
+	if (nvertices == 4)
+	{
+		point = point + vertices[3];
+		point = (point * 0.25);
+	}
+	else point = point * (1/3);
+
 	this->vertices = vertices;
 	this->nvertices = nvertices;
 	this->bounded = true;
-	this->normal = abccross;
-	this->point = vertices[2];
+	this->normal = (abccross * -1);
+	this->point = point;
 	this->exists = true;
 }
 
@@ -94,6 +104,14 @@ std::ostream& operator << (std::ostream& outstream, buffinc::Ray ray)
 {
 	outstream << ray.start << "-->" << ray.direction;
 	return outstream;
+}
+
+//outputs plane's postion;normal vectors;bounded;exists
+std::ostream& operator << (std::ostream& outstream, buffinc::Plane plane)
+{
+	outstream << "[" << plane.point << ";" << plane.normal << ";"
+					<< plane.bounded << ";" << plane.exists << "]";
+	return outstream; 
 }
 
 Vector3& operator << (buffinc::Plane& plane, buffinc::Ray& ray)

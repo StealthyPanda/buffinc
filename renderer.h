@@ -56,6 +56,8 @@ namespace buffinc
 }
 
 std::ostream& operator << (std::ostream& outstream, buffinc::Ray ray);
+std::ostream& operator << (std::ostream& outstream, buffinc::Plane plane);
+
 
 Vector3& operator << (buffinc::Plane& plane, buffinc::Ray& ray);
 Vector3& operator >> (buffinc::Ray& ray, buffinc::Plane& plane);
