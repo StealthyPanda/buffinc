@@ -1,7 +1,7 @@
 {
-    "compiler": "",
+    "compiler": "g++",
     "inputs": [
-        "runner.cpp", "Vector3.cpp", "Quaternion.cpp"
+        "./runner.cpp", "./libs/*"
     ],
     "includes": [
         
