@@ -1,0 +1,12 @@
+{
+    "compiler": "",
+    "inputs": [
+        "runner.cpp", "Vector3.cpp", "Quaternion.cpp"
+    ],
+    "includes": [
+        
+    ],
+    "output": "",
+    "run": true,
+    "flags": []
+}

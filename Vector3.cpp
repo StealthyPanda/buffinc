@@ -4,6 +4,7 @@
 #include <cmath>
 #include "Vector3.h"
 
+
 long double mod(long double value)
 {
 	if (value < 0) value *= -1;
@@ -45,10 +46,11 @@ Vector3::Vector3(const Vector3& v1)
 	x = v1.x;
 	y = v1.y;
 	z = v1.z;
+
 	this->isnull = v1.isnull;
 }
 
-std::string Vector3::getStringRepresentation()
+std::string Vector3::getStringRepresentation() const
 {
 
 	std::ostringstream bruh;
@@ -59,7 +61,7 @@ std::string Vector3::getStringRepresentation()
 
 Vector3 Vector3::getMultiplied(long double value)
 {
-	return (*this * value);
+	return Vector3(this->x * value, this->y * value, this->z * value);
 }
 
 void Vector3::multiply(long double value)
@@ -69,54 +71,16 @@ void Vector3::multiply(long double value)
 	z *= value;
 }
 
-std::ostream& operator<< (std::ostream& stream, Vector3 vector)
-{
-	stream << vector.getStringRepresentation();
-	return stream;
-}
 
-
-Vector3 operator+ (const Vector3 v1, const Vector3 v2)
-{
-	return Vector3(v1.x + v2.x, v1.y + v2.y, v1.z + v2.z);
-}
-
-Vector3 operator* (const Vector3 v1, const long double value)
-{
-	return Vector3(v1.x * value, v1.y * value, v1.z * value);
-}
-
-Vector3 operator* (const long double value, const Vector3 v1)
-{
-	return Vector3(v1.x * value, v1.y * value, v1.z * value);
-}
-
-Vector3 operator- (const Vector3 v1, const Vector3 v2)
-{
-	return (v1 + (v2 * -1));
-}
-
-
-long double dotproduct(const Vector3& v1, const Vector3& v2)
-{
-	return ((v1.x * v2.x) + (v1.y * v2.y) + (v1.z * v2.z));
-}
-
-Vector3 crossproduct(const Vector3& v1, const Vector3& v2)
-{
-
-	return Vector3(((v1.y * v2.z) - (v2.y * v1.z)), ((v2.x * v1.z) - (v1.x * v2.z)), ((v1.x * v2.y) - (v2.x * v1.y)));
-
-}
-
-long double Vector3::getMagnitude()
+long double Vector3::getMagnitude() const
 {
 	return std::pow((x * x) + (y * y) + (z * z), 0.5);
 }
 
-Vector3 Vector3::getNormalised()
+Vector3 Vector3::getNormalised() const
 {
-	return Vector3(*this * (1/getMagnitude()));
+	long double invmag = (1/getMagnitude());
+	return Vector3(this->x * invmag, this->y * invmag , this->z * invmag);
 }
 
 void Vector3::normalise()
@@ -130,7 +94,7 @@ void Vector3::normalise()
 
 void Vector3::filter()
 {
-	long double threshold = std::pow(10, -8);
+	// long double threshold = std::pow(10, -8);
 	if (mod(x) <= threshold) x = 0;
 	if (mod(y) <= threshold) y = 0;
 	if (mod(z) <= threshold) z = 0;
@@ -143,7 +107,54 @@ Vector3 Vector3::getFiltered()
 	return buff;
 }
 
-bool operator== (const Vector3 v1, const Vector3 v2)
+
+
+std::ostream& operator<< (std::ostream& stream, const Vector3& vector)
+{
+	stream << vector.getStringRepresentation();
+	return stream;
+}
+
+
+Vector3 operator+ (const Vector3& v1, const Vector3& v2)
+{
+	return Vector3(v1.x + v2.x, v1.y + v2.y, v1.z + v2.z);
+}
+
+Vector3 operator* (const Vector3& v1, const long double value)
+{
+	return Vector3(v1.x * value, v1.y * value, v1.z * value);
+}
+
+Vector3 operator* (const long double value, const Vector3& v1)
+{
+	return (v1 * value);
+}
+
+Vector3 operator- (const Vector3& v1, const Vector3& v2)
+{
+	return Vector3(v1.x - v2.x, v1.y - v2.y, v1.z - v2.z);
+}
+
+Vector3 operator- (const Vector3& v2)
+{
+	return Vector3(0 - v2.x, 0 - v2.y, 0 - v2.z);
+}
+
+
+long double dot(const Vector3& v1, const Vector3& v2)
+{
+	return ((v1.x * v2.x) + (v1.y * v2.y) + (v1.z * v2.z));
+}
+
+Vector3 cross(const Vector3& v1, const Vector3& v2)
+{
+
+	return Vector3(((v1.y * v2.z) - (v2.y * v1.z)), ((v2.x * v1.z) - (v1.x * v2.z)), ((v1.x * v2.y) - (v2.x * v1.y)));
+
+}
+
+bool operator== (const Vector3& v1, const Vector3& v2)
 {
 	return ((v1.x == v2.x) and (v1.y == v2.y) and (v1.z == v2.z));
 }
