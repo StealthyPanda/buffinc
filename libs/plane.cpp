@@ -72,7 +72,3 @@ plane* plane::rotate(long double angleinradians, const Vector3& axis)
 }
 
 
-void plane::project(camera* cam)
-{
-
-}

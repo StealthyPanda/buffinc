@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "./inc/plane.h"
+#include "./inc/ray.h"
 
 #define pi 3.141592
 
@@ -11,20 +11,18 @@ int main()
 	
 	Vector3 i(1, 0, 0), j(0, 1, 0), k(0, 0, 1);
 
+	cout << dot(Vector3(3, 0, -0.333333), Vector3(-1, 0, 0)) << endl;
+
 	Vector3 planepoints[] = {
-		Vector3(3, 0, 0), Vector3(3, -3, 0), Vector3(6, 0, 0)
+		Vector3(3, 1, -1), Vector3(3, -1, -1), Vector3(3, 0, 1)
 	};
+	plane tri(planepoints);
+	cout << tri.center << tri.direction << endl;	
 
-	plane test(planepoints);
+	ray sling = getRay(Vector3(0, 0, 0), i);
 
-	cout << test.center << test.normal << test.direction << endl;
-
-	test.rotate(pi/2, -j);
-
-	cout << test.center << test.normal << test.direction << endl;
-	cout << test.points[0] + test.center << test.points[1] + test.center << test.points[2] + test.center << endl;
-	// cout << planepoints[0] << planepoints[1] << planepoints[2] << endl;
-
+	cout << sling.point << sling.direction << endl;
+	cout << sling.intersects(planepoints) << endl;
 
 	return 0;
 }

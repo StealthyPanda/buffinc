@@ -23,6 +23,7 @@ camera::camera()
 camera::~camera()
 {
 	delete film;
+	delete[] points;
 }
 
 void camera::capture()

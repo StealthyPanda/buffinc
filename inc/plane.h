@@ -1,7 +1,6 @@
 #pragma once
 
 #include "entity.h"
-#include "camera.h"
 #include "color.h"
 
 class plane : public entity
@@ -22,6 +21,4 @@ public:
 
 	plane* rotate(const Quaternion& rotor);
 	plane* rotate(long double angleinradians, const Vector3& axis);
-
-	void project(camera* cam);
 };
