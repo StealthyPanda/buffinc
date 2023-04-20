@@ -84,7 +84,7 @@ entity* entity::rotate(long double angleinradians, const Vector3& axis)
 
 entity* entity::rotateTo(const Vector3& orientation)
 {
-	rotate(Quaternion::getRotor(orientation, direction));
+	rotate(Quaternion::getRotor(direction, orientation));
 	return this;
 }
 

@@ -10,6 +10,8 @@ public:
 
 	Vector3 normal;
 
+	bool newpoints;
+
 	//note that while the *points member stores vectors in LOCAL coordinated wrt center in
 	//entities, here points is meant to be GLOBAL coordinates, and the planes constructor
 	//will internally convert them to local ones. This exception is ONLY for planes.

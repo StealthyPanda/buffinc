@@ -21,22 +21,40 @@ ray ray::getRay(const Vector3& from, const Vector3& to)
 
 #include <iostream>
 
-Vector3 ray::intersects(const plane& p)
+bool ray::intersects(const plane& p)
 {
-	std::cout << "inside intersect" << std::endl;
-	std::cout << p.center << p.direction << std::endl;
-	long double lambda = dot(p.direction, p.center);
-	std::cout << lambda << std::endl;
-
-	lambda -= dot(p.direction, this->point);
-	std::cout << lambda << std::endl;
+	// std::cout << "inside intersect" << std::endl;
+	// std::cout << p.center << p.direction << std::endl;
+	long double lambda = dot(p.direction, p.center - this->point);
+	// std::cout << lambda << std::endl;
 
 	lambda /= dot(p.direction, this->direction);
-	std::cout << lambda << std::endl;
+	// std::cout << lambda << std::endl;
+
+	if (lambda <= 0) return false;
 
 	Vector3 intersection = this->point + (this->direction * lambda);
 
-	return intersection;
+	// return intersection;
+
+	// std::cout << "intersection point: " << intersection << std::endl;
+
+	bool c1, c2, c3;
+
+	c1 = dot(cross(p.points[1] - p.points[0], intersection - p.points[0]) , p.direction) >= 0;
+	c2 = dot(cross(p.points[2] - p.points[1], intersection - p.points[1]) , p.direction) >= 0;
+	c3 = dot(cross(p.points[0] - p.points[2], intersection - p.points[2]) , p.direction) >= 0;
+
+	// std::cout << "conditions: " << c1 << c2 << c3 << std::endl;
+	// std::cout << "conditions: " << c1 << c2 << c3 << std::endl;
+
+	// std::cout << dot(cross(p.points[1] - p.points[0], intersection - p.points[0]) , p.direction) <<
+	// dot(cross(p.points[2] - p.points[1], intersection - p.points[1]) , p.direction) <<
+	// dot(cross(p.points[0] - p.points[2], intersection - p.points[2]) , p.direction) << std::endl;
+
+	if (c1 and c2 and c3) return true;
+	if ((!c1) and (!c2) and (!c3)) return true;
+	return false;
 }
 
 

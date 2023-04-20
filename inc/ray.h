@@ -12,7 +12,7 @@ public:
 	
 	static ray getRay(const Vector3& from, const Vector3& to);
 
-	Vector3 intersects(const plane& p);
+	bool intersects(const plane& p);
 };
 
 ray getRay(const Vector3& from, const Vector3& to);
