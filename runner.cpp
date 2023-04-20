@@ -14,7 +14,7 @@ int main()
 	// cout << dot(Vector3(3, 0, -0.333333), Vector3(-1, 0, 0)) << endl;
 
 	Vector3 planepoints[] = {
-		Vector3(3, -10, 1), Vector3(3, -20, 3), Vector3(3, -10, 3),
+		Vector3(3, 0, 0), Vector3(3, -5, 0), Vector3(3, 0, 5),
 	};
 	plane tri(planepoints);
 
@@ -27,12 +27,16 @@ int main()
 	camera cam;
 	// cam.rotate(pi/6, -j);
 
-	plane viewables[] = { tri };
+	plane* viewables[] = { &tri };
 
-	for (int j = 0; j < 2; ++j)
+	for (int j = 0; j < 100; ++j)
 	{
 		cam.capture(viewables, 1);
-		tri.rotate(pi/2, i);
+		// viewables[0]->rotate(pi/5, i);
+		// viewables[0]->translate(Vector3(1, 0, 0));
+		tri.rotate(pi/50, k);
+		// tri.translate(Vector3(0, 1, 0));
+		// cout << viewables[0].center << viewables[0].points[0] << endl;
 	}
 
 	char buff;

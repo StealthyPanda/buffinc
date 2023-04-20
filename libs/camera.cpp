@@ -12,7 +12,7 @@ camera::camera()
 	film = new raster(720, 1280);
 	nframe = 0;
 
-	dist = 0.5;
+	dist = 0.1;
 	width = 0.128 * 4;
 	height = 0.072 * 4;
 
@@ -72,7 +72,7 @@ camera* camera::rotateTo(const Vector3& orientation)
 	return this;
 }
 
-void camera::capture(plane *planes, int nplanes)
+void camera::capture(plane **planes, int nplanes)
 {
 
 	// ray light = ray(Vector3(), Vector3());
@@ -85,13 +85,17 @@ void camera::capture(plane *planes, int nplanes)
 		{
 			light = getRay(this->center, this->points[0] - (ratio * ((localy * j) + (localz * i))));
 			
+			this->film->matrix[i][j][0] = 0;
+			this->film->matrix[i][j][1] = 0;
+			this->film->matrix[i][j][2] = 0;
+
 			for (int m = 0; m < nplanes; ++m)
 			{
-				hit = light.intersects(planes[m]);
+				hit = light.intersects(*planes[m]);
 				if (hit)
 				{
-					film->matrix[i][j][0] = 255;
 					film->matrix[i][j][1] = 255;
+					film->matrix[i][j][2] = 255;
 					break;
 				}
 			}
@@ -111,17 +115,6 @@ void camera::capture(plane *planes, int nplanes)
 	buffer << "./camera/buffer_" << nframe << ".txt";
 	film->writetofile(buffer.str());
 	nframe++;
-
-	for (int i = 0; i < this->film->rows; ++i)
-	{
-		for (int j = 0; j < this->film->cols; ++j)
-		{
-			this->film->matrix[i][j][0] = 0;
-			this->film->matrix[i][j][1] = 0;
-			this->film->matrix[i][j][2] = 0;
-		}
-	}
-
 }
 
 void camera::printinfo()

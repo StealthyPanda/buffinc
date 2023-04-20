@@ -41,9 +41,11 @@ bool ray::intersects(const plane& p)
 
 	bool c1, c2, c3;
 
-	c1 = dot(cross(p.points[1] - p.points[0], intersection - p.points[0]) , p.direction) >= 0;
-	c2 = dot(cross(p.points[2] - p.points[1], intersection - p.points[1]) , p.direction) >= 0;
-	c3 = dot(cross(p.points[0] - p.points[2], intersection - p.points[2]) , p.direction) >= 0;
+	Vector3 a = p.points[0] + p.center, b = p.points[1] + p.center, c = p.points[2] + p.center;
+
+	c1 = dot(cross(b - a, intersection - a) , p.direction) >= 0;
+	c2 = dot(cross(c - b, intersection - b) , p.direction) >= 0;
+	c3 = dot(cross(a - c, intersection - c) , p.direction) >= 0;
 
 	// std::cout << "conditions: " << c1 << c2 << c3 << std::endl;
 	// std::cout << "conditions: " << c1 << c2 << c3 << std::endl;

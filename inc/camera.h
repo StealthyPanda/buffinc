@@ -21,7 +21,7 @@ public:
 	camera* rotate(long double angleinradians, const Vector3& axis);
 	camera* rotateTo(const Vector3& orientation);
 
-	void capture(plane *planes, int nplanes);
+	void capture(plane **planes, int nplanes);
 
 	void printinfo();
 };
