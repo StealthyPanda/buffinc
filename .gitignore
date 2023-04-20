@@ -5,3 +5,6 @@ blackbuck.bmp
 debug/
 *.png
 *.jpg
+finaloutput/
+debug/
+*.avi

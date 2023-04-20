@@ -10,7 +10,7 @@ public:
 	unsigned nframe;
 	raster *film;
 
-	Vector3 localx, localy, localz;
+	Vector3 localx, localy, localz, globallight;
 
 	long double dist, width, height, ratio;
 

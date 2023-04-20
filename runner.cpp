@@ -1,5 +1,6 @@
 #include <iostream>
 
+#include "./inc/color.h"
 #include "./inc/camera.h"
 
 #define pi 3.141592
@@ -14,9 +15,9 @@ int main()
 	// cout << dot(Vector3(3, 0, -0.333333), Vector3(-1, 0, 0)) << endl;
 
 	Vector3 planepoints[] = {
-		Vector3(3, 0, 0), Vector3(3, -5, 0), Vector3(3, 0, 5),
+		Vector3(3, 0, 0), Vector3(3, -2, 0), Vector3(3, 0, 2),
 	};
-	plane tri(planepoints);
+	plane tri(planepoints, rgb(235, 64, 52));
 
 	// plane another = plane(tri);
 	// another.translate(Vector3(0, -5, 1));
@@ -31,7 +32,7 @@ int main()
 
 	for (int j = 0; j < 100; ++j)
 	{
-		cam.capture(viewables, 1);
+		cam.capture(viewables, (sizeof(viewables)/sizeof(plane*)));
 		// viewables[0]->rotate(pi/5, i);
 		// viewables[0]->translate(Vector3(1, 0, 0));
 		tri.rotate(pi/50, k);

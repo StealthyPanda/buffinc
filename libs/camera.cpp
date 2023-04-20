@@ -26,6 +26,9 @@ camera::camera()
 	localx = Vector3(1, 0, 0);
 	localy = Vector3(0, 1, 0);
 	localz = Vector3(0, 0, 1);
+
+	globallight = Vector3(-1, -1, -1);
+	globallight.normalise();
 }
 
 camera::~camera()
@@ -79,6 +82,8 @@ void camera::capture(plane **planes, int nplanes)
 	ray light = ray(Vector3(), Vector3());
 	bool hit;
 
+	long double d;
+
 	for (unsigned i = 0; i < this->film->rows; ++i)
 	{
 		for (unsigned j = 0; j < this->film->cols; ++j)
@@ -94,8 +99,13 @@ void camera::capture(plane **planes, int nplanes)
 				hit = light.intersects(*planes[m]);
 				if (hit)
 				{
-					film->matrix[i][j][1] = 255;
-					film->matrix[i][j][2] = 255;
+					d = dot(planes[m]->normal, globallight);
+					
+					if (d < 0) d = -d;
+
+					film->matrix[i][j][0] = (1 - d) * planes[m]->basecolor.r;
+					film->matrix[i][j][1] = (1 - d) * planes[m]->basecolor.g;
+					film->matrix[i][j][2] = (1 - d) * planes[m]->basecolor.b;
 					break;
 				}
 			}

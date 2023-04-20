@@ -25,6 +25,8 @@
 - [Table of Contents](#table-of-contents)
 - [Authors ](#authors-)
 
+![First Render in tachyon](./docs/firstrender.gif)
+
 <!-- ## About <a name = "about"></a>
 A python library to simulate quantum computing on classical computers. -->
 
