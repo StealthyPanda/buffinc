@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://github.com/StealthyPanda/buffinc" rel="noopener">
- <img width=200px height=200px src="./docs/logo.png" alt="Project logo"></a>
+ <img width=150px height=150px src="./docs/logo.png" alt="Project logo"></a>
 </p>
 
 <h3 align="center">Tachyon</h3>
