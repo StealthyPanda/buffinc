@@ -10,7 +10,9 @@ int main()
 	using namespace std;
 	cout << "Hajimemashite" << endl;
 
-	color bruh = rgb(69, 42, 31), back = hsv(bruh.h, bruh.s, bruh.v);
+	color bruh = rgb(128, 191, 191), back = hsv(bruh.h, bruh.s, bruh.v);
+	cout << "in main:" << endl;
+	cout << bruh.h << " " << bruh.s << " " << bruh.v << endl;
 	cout << (int) bruh.r << " " << (int) back.r << endl;
 	cout << (int) bruh.g << " " << (int) back.g << endl;
 	cout << (int) bruh.b << " " << (int) back.b << endl;

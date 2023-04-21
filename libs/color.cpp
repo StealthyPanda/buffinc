@@ -34,9 +34,9 @@ color color::rgb(unsigned char r, unsigned char g, unsigned char b)
 	c.g = g;
 	c.b = b;
 
-	std::cout << "r: " << short(r) << " g: " << short(g) << " b: " << short(b) << std::endl;
 
 	double rdash = ((short) r)/255.0, gdash = ((short) g)/255.0, bdash = ((short) b)/255.0;
+	// std::cout << "rdash: " << rdash << " gdash: " << gdash << " bdash: " << bdash << std::endl;
 	double cmax = rdash, cmin = rdash;
 
 	if (gdash > cmax) cmax = gdash;
@@ -55,8 +55,9 @@ color color::rgb(unsigned char r, unsigned char g, unsigned char b)
 	else if (cmax == rdash)
 	{
 		buffer = ((gdash - bdash)/delta);
-		h = 60 * ((int)(buffer) % 6);
+		h = ((int)(buffer) % 6);
 		h += (buffer - (int)(buffer));
+		h = 60 * h;
 	}
 	else if (cmax == gdash)
 		h = 60 * (((bdash - rdash)/delta) + 2);
@@ -68,6 +69,9 @@ color color::rgb(unsigned char r, unsigned char g, unsigned char b)
 	else s = delta/cmax;
 
 	v = cmax;
+
+	if (h < 0)   h = h + 360;
+	if (h > 360) h = h - 360;
 
 	c.h = h;
 	c.s = s;
