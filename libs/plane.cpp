@@ -23,6 +23,18 @@ plane::plane(Vector3 *points)
 	this->points[2] = this->points[2] - this->center;
 
 	this->newpoints = false;
+
+	this->shade = color();
+	this->shade.r = this->basecolor.r;
+	this->shade.g = this->basecolor.g;
+	this->shade.b = this->basecolor.b;
+	this->shade.h = this->basecolor.h;
+	this->shade.s = this->basecolor.s;
+
+	if (globallight != NULL) this->shade.v = dot(this->normal, *(this->globallight));
+	else this->shade.v = this->basecolor.v;
+
+	if (this->shade.v < 0) this->shade.v = -(this->shade.v);
 }
 
 plane::plane(Vector3 *points, const color& bc)
@@ -45,6 +57,19 @@ plane::plane(Vector3 *points, const color& bc)
 	this->points[2] = this->points[2] - this->center;
 
 	this->newpoints = false;
+
+	this->shade = color();
+	this->shade.r = this->basecolor.r;
+	this->shade.g = this->basecolor.g;
+	this->shade.b = this->basecolor.b;
+	this->shade.h = this->basecolor.h;
+	this->shade.s = this->basecolor.s;
+
+	if (globallight != NULL) this->shade.v = dot(this->normal, *(this->globallight));
+	else this->shade.v = this->basecolor.v;
+
+	// if (this->shade.v < 0) this->shade.v = -(this->shade.v);
+	this->shade.v = this->shade.v * this->shade.v;
 }
 
 plane::plane(const plane& p)
@@ -54,6 +79,7 @@ plane::plane(const plane& p)
 	this->direction = Vector3(p.direction);
 	this->npoints = 3;
 	this->basecolor = (p.basecolor);
+	this->shade = (p.shade);
 
 	this->points = new Vector3[3];
 	for (int i = 0; i < 3; ++i)
@@ -73,6 +99,13 @@ plane* plane::rotate(const Quaternion& rotor)
 {
 	entity::rotate(rotor);
 	normal = direction;
+
+	if (globallight != NULL) this->shade.v = dot(this->normal, *(this->globallight));
+	else this->shade.v = this->basecolor.v;
+
+	// if (this->shade.v < 0) this->shade.v = -(this->shade.v);	
+	this->shade.v = this->shade.v * this->shade.v;
+
 	return this;
 }
 
@@ -80,11 +113,12 @@ plane* plane::rotate(long double angleinradians, const Vector3& axis)
 {
 	entity::rotate(angleinradians, axis);
 	normal = direction;
+
+	if (globallight != NULL) this->shade.v = dot(this->normal, *(this->globallight));
+	else this->shade.v = this->basecolor.v;
+
+	// if (this->shade.v < 0) this->shade.v = -(this->shade.v);
+	this->shade.v = this->shade.v * this->shade.v;
+
 	return this;
-}
-
-
-void plane::calculatehsv()
-{
-	
 }

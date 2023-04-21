@@ -8,7 +8,7 @@ class plane : public entity
 public:
 	color basecolor, shade;
 
-	Vector3 normal;
+	Vector3 normal, *globallight = NULL;
 
 	bool newpoints;
 
@@ -24,5 +24,5 @@ public:
 	plane* rotate(const Quaternion& rotor);
 	plane* rotate(long double angleinradians, const Vector3& axis);
 
-	void calculatehsv();
+	// void calculatehsv();
 };

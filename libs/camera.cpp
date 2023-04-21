@@ -3,6 +3,7 @@
 #include "../inc/camera.h"
 #include "../inc/ray.h"
 #include "../inc/plane.h"
+#include "../inc/color.h"
 
 
 camera::camera()
@@ -84,6 +85,8 @@ void camera::capture(plane **planes, int nplanes)
 
 	long double d;
 
+	color shadebuff;
+
 	for (unsigned i = 0; i < this->film->rows; ++i)
 	{
 		for (unsigned j = 0; j < this->film->cols; ++j)
@@ -99,13 +102,19 @@ void camera::capture(plane **planes, int nplanes)
 				hit = light.intersects(*planes[m]);
 				if (hit)
 				{
-					d = dot(planes[m]->normal, globallight);
+					// d = dot(planes[m]->normal, globallight);
 					
-					if (d < 0) d = -d;
+					// if (d < 0) d = -d;
 
-					film->matrix[i][j][0] = (1 - d) * planes[m]->basecolor.r;
-					film->matrix[i][j][1] = (1 - d) * planes[m]->basecolor.g;
-					film->matrix[i][j][2] = (1 - d) * planes[m]->basecolor.b;
+					// film->matrix[i][j][0] = (1 - d) * planes[m]->basecolor.r;
+					// film->matrix[i][j][1] = (1 - d) * planes[m]->basecolor.g;
+					// film->matrix[i][j][2] = (1 - d) * planes[m]->basecolor.b;
+					// break;
+					shadebuff = hsv(planes[m]->shade.h, planes[m]->shade.s, planes[m]->shade.v);
+
+					film->matrix[i][j][0] = shadebuff.r;
+					film->matrix[i][j][1] = shadebuff.g;
+					film->matrix[i][j][2] = shadebuff.b;
 					break;
 				}
 			}

@@ -45,7 +45,7 @@ color color::rgb(unsigned char r, unsigned char g, unsigned char b)
 	if (gdash < cmin) cmin = gdash;
 	if (bdash < cmin) cmin = bdash;
 
-	std::cout << "rdash : " << rdash << " gdash: " << gdash << " bdash: " << bdash << std::endl;
+	// std::cout << "rdash : " << rdash << " gdash: " << gdash << " bdash: " << bdash << std::endl;
 
 	double delta = cmax - cmin;
 
@@ -138,8 +138,8 @@ color color::hsv(double h, double s, double v)
 		bdash = X;
 	}
 
-	std::cout << "In hsv: " << m << std::endl;
-	std::cout << rdash << " " << gdash << " " << bdash << std::endl;
+	// std::cout << "In hsv: " << m << std::endl;
+	// std::cout << rdash << " " << gdash << " " << bdash << std::endl;
 
 	c.r = (rdash + m) * 255;
 	c.g = (gdash + m) * 255;
