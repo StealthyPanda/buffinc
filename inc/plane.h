@@ -6,7 +6,7 @@
 class plane : public entity
 {
 public:
-	color basecolor;
+	color basecolor, shade;
 
 	Vector3 normal;
 
@@ -23,4 +23,6 @@ public:
 
 	plane* rotate(const Quaternion& rotor);
 	plane* rotate(long double angleinradians, const Vector3& axis);
+
+	void calculatehsv();
 };

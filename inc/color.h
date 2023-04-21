@@ -3,14 +3,16 @@
 class color
 {
 public:
-	char r, g, b, h, s, v;
+	unsigned char r, g, b;
+	double h, s, v;
+	
 	color();
 	~color();
 	color(const color& c);
 
-	static color rgb(char r, char g, char b);
-	static color hsv(char r, char g, char b);
+	static color rgb(unsigned char r, unsigned char g, unsigned char b);
+	static color hsv(double h, double s, double v);
 };
 
-color rgb(char r, char g, char b);
-color hsv(char h, char s, char v);
+color rgb(unsigned char r, unsigned char g, unsigned char b);
+color hsv(double h, double s, double v);

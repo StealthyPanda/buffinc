@@ -25,7 +25,13 @@
 - [Table of Contents](#table-of-contents)
 - [Authors ](#authors-)
 
-![First Render in tachyon](./docs/firstrender.gif)
+<div align = "center">
+
+  ![First Render in tachyon](./docs/firstrender.gif)
+
+  *first render ever in tachyon*
+  
+</div>
 
 <!-- ## About <a name = "about"></a>
 A python library to simulate quantum computing on classical computers. -->
@@ -113,7 +119,7 @@ Add additional notes about how to deploy this on a live system.
 - [NodeJs](https://nodejs.org/en/) - Server Environment -->
 
 ## Authors <a name = "authors"></a>
-- [@stealthypanda](https://github.com/stealthypanda)
+- [@stealthypanda](https://github.com/stealthypanda)🐼
 
 
 <!-- 

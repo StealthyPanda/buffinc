@@ -84,3 +84,7 @@ plane* plane::rotate(long double angleinradians, const Vector3& axis)
 }
 
 
+void plane::calculatehsv()
+{
+	
+}
