@@ -11,7 +11,7 @@
   [![GitHub Issues](https://img.shields.io/github/issues/stealthypanda/buffinc.svg)](https://img.shields.io/github/issues/stealthypanda/buffinc.svg)
   [![GitHub Pull Requests](https://img.shields.io/github/issues-pr/stealthypanda/buffinc.svg)](https://img.shields.io/github/issues-pr/stealthypanda/buffinc.svg)
   [![License](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
-  ![GitHub release (latest by date)](https://img.shields.io/github/v/release/stealthypanda/buffinc)
+  <!-- ![GitHub release (latest by date)](https://img.shields.io/github/v/release/stealthypanda/buffinc) -->
 
 </div>
 
@@ -23,7 +23,14 @@
 
 ## Table of Contents
 - [Table of Contents](#table-of-contents)
+- [About ](#about-)
 - [Authors ](#authors-)
+
+
+
+
+## About <a name = "about"></a>
+This is meant to be a fast render engine, written from scratch mainly in C++. It uses no external libraries, and in its final stage, will be a complete rendering pipeline with no external dependencies (to reduce the pain C++ library system induces in ones rear) and completely self contained from generating assets to the final render. The project is still in a very early phase, case in point only a single tri has been rendered reliably. 
 
 <div align = "center">
 
@@ -33,11 +40,7 @@
   
 </div>
 
-<!-- ## About <a name = "about"></a>
-A python library to simulate quantum computing on classical computers. -->
-
 <!-- ## Getting Started <a name = "getting_started"></a> -->
-
 <!-- ### Prerequisites
 This library is self contained, and optionally uses matplotlib for plotting graphs.
 
