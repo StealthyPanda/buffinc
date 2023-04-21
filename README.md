@@ -17,7 +17,7 @@
 
 ---
 
-<p align="center"> A C++ render engine. WIP.
+<p align="center"> A C++ render engine. WIP. Powered by <a href = "https://github.com/stealthypanda/hermes">hermes</a>.
     <br> 
 </p>
 
@@ -40,6 +40,7 @@ This is meant to be a fast render engine, written from scratch mainly in C++. It
   
 </div>
 
+This project uses the <a href = "https://github.com/stealthypanda/hermes">hermes build system</a>.
 <!-- ## Getting Started <a name = "getting_started"></a> -->
 <!-- ### Prerequisites
 This library is self contained, and optionally uses matplotlib for plotting graphs.
