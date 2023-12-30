@@ -123,7 +123,7 @@ Add additional notes about how to deploy this on a live system.
 - [NodeJs](https://nodejs.org/en/) - Server Environment -->
 
 ## Authors <a name = "authors"></a>
-[![Foo](https://img.shields.io/badge/Made_with_❤️_by-@stealthypanda🐼-orange?style=for-the-badge&logo=python&link=)](https://sites.google.com/iitj.ac.in/stealthypanda/home)
+[![Foo](https://img.shields.io/badge/Made_with_❤️_by-@stealthypanda🐼-orange?style=for-the-badge&logo=cplusplus&link=)](https://sites.google.com/iitj.ac.in/stealthypanda/home)
 
 
 <!-- 
