@@ -1,12 +1,8 @@
 {
-    "compiler": "g++",
-    "inputs": [
-        "./runner.cpp", "./libs/*"
-    ],
-    "includes": [
-        
-    ],
-    "output": "",
+    "compiler": "",
+    "inputs": ["./runner.cpp", "./libs/*.cpp"],
+    "includes": ["./inc/"],
     "run": true,
-    "flags": []
+    "flags": [],
+    "output": ""
 }

@@ -8,8 +8,8 @@
 <div align="center">
 
   [![Status](https://img.shields.io/badge/status-active-success.svg)]() 
-  [![GitHub Issues](https://img.shields.io/github/issues/stealthypanda/buffinc.svg)](https://img.shields.io/github/issues/stealthypanda/buffinc.svg)
-  [![GitHub Pull Requests](https://img.shields.io/github/issues-pr/stealthypanda/buffinc.svg)](https://img.shields.io/github/issues-pr/stealthypanda/buffinc.svg)
+  <!-- [![GitHub Issues](https://img.shields.io/github/issues/stealthypanda/buffinc.svg)](https://img.shields.io/github/issues/stealthypanda/buffinc.svg)
+  [![GitHub Pull Requests](https://img.shields.io/github/issues-pr/stealthypanda/buffinc.svg)](https://img.shields.io/github/issues-pr/stealthypanda/buffinc.svg) -->
   [![License](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
   <!-- ![GitHub release (latest by date)](https://img.shields.io/github/v/release/stealthypanda/buffinc) -->
 
@@ -21,22 +21,22 @@
     <br> 
 </p>
 
-## Table of Contents
+<!-- ## Table of Contents
 - [Table of Contents](#table-of-contents)
 - [About ](#about-)
-- [Authors ](#authors-)
+- [Authors ](#authors-) -->
 
 
 
 
 ## About <a name = "about"></a>
-This is meant to be a fast render engine, written from scratch mainly in C++. It uses no external libraries, and in its final stage, will be a complete rendering pipeline with no external dependencies (to reduce the pain C++ library system induces in ones rear) and completely self contained from generating assets to the final render. The project is still in a very early phase, case in point only a single tri has been rendered reliably. 
+This is meant to be a fast render engine, written from scratch mainly in C++. It uses no external libraries, and in its final stage, will be a complete rendering pipeline with no external dependencies and completely self contained from generating assets to the final render. The project is still in a very early phase. 
 
 <div align = "center">
 
   ![First Render in tachyon](./docs/firstrender.gif)
 
-  *first render ever in tachyon*
+  *first ever render in tachyon*
   
 </div>
 
@@ -123,7 +123,7 @@ Add additional notes about how to deploy this on a live system.
 - [NodeJs](https://nodejs.org/en/) - Server Environment -->
 
 ## Authors <a name = "authors"></a>
-- [@stealthypanda](https://github.com/stealthypanda)🐼
+[![Foo](https://img.shields.io/badge/Made_with_❤️_by-@stealthypanda🐼-orange?style=for-the-badge&logo=python&link=)](https://sites.google.com/iitj.ac.in/stealthypanda/home)
 
 
 <!-- 

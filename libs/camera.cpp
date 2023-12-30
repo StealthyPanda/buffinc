@@ -80,6 +80,7 @@ void camera::capture(plane **planes, int nplanes)
 {
 
 	// ray light = ray(Vector3(), Vector3());
+
 	ray light = ray(Vector3(), Vector3());
 	bool hit;
 
