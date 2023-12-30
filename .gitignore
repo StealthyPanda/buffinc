@@ -8,3 +8,4 @@ debug/
 finaloutput/
 debug/
 *.avi
+.hermes/
